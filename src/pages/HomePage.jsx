@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-useEffect(() => {}, []);
+import React from 'react';
 
 const HomePage = () => {
   return <div>pageHome</div>;
