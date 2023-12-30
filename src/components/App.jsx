@@ -3,24 +3,25 @@ import HomePage from 'pages/HomePage';
 import MoviesPage from 'pages/MoviesPage';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Header from './Header/Header';
+import Layout from 'layout/Layout';
+import Movie from 'pages/Movie';
+import Cast from './Cast/Cast';
+import Reviews from './Reviews/Reviews';
 
 const App = () => {
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />}>
-          <Route index element={<MoviesPage />} />
-          <Route path="/movies/:movieId">
-            <Route index />
-            <Route path="reviews" />
-            <Route path="cast" />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="movies" element={<MoviesPage />} />
+          <Route path="movies/:movieId" element={<Movie />}>
+            <Route path="reviews" element={<Reviews />} />
+            <Route path="cast" element={<Cast />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
+          <Route path="*" element={<ErrorPage />} />
         </Route>
-        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
