@@ -98,7 +98,7 @@ const Movie = () => {
               </li>
             </ul>
           </div>
-          <Suspense fallback={<div>Loading subpage...</div>}>
+          <Suspense fallback={<div>Loading ...</div>}>
             <Outlet />
           </Suspense>
         </section>
