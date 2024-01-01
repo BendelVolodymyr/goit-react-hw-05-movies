@@ -1,5 +1,5 @@
 import Loader from 'components/Loader/Loader';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieId } from 'services/getMovies';
 
@@ -38,7 +38,7 @@ const Movie = () => {
   } = movie;
 
   const resultPercentages = Math.round(vote_average * 10);
-  
+
   return (
     <>
       {isLoading && <Loader />}
@@ -98,7 +98,9 @@ const Movie = () => {
               </li>
             </ul>
           </div>
-          <Outlet />
+          <Suspense fallback={<div>Loading subpage...</div>}>
+            <Outlet />
+          </Suspense>
         </section>
       )}
     </>
