@@ -24,7 +24,12 @@ const getMovieReviews = async (id) => {
     return data;
 }
 
-export { getMoviesTrend, getMovieId, getMovieCast, getMovieReviews };
+const getMovieSearch = async (searchName) => {
+    const {data} = await axios.get(`/search/movie?query=${searchName}&api_key=${KEY_API}`);
+    return data;
+}
+
+export { getMoviesTrend, getMovieId, getMovieCast, getMovieReviews, getMovieSearch };
 
 
 
