@@ -17,10 +17,7 @@ const MoviesPage = () => {
     getSearchName(query);
   }, [searchParams]);
 
-  useEffect(() => {
-    if (location.search === '') return;
-    getSearchName(location.search.slice(8));
-  }, [location.search]);
+  
   const getSearchName = async Name => {
     setIsLoading(true);
     try {
