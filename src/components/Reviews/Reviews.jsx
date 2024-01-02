@@ -27,7 +27,7 @@ const Reviews = () => {
     <>
       {isLoading && <Loader />}
       {movieReviews.length !== 0 ? (
-        <div>
+        <div className="box-cast">
           <p>
             {movieReviews
               .map(({ content }) => {

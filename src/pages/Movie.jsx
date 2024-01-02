@@ -43,9 +43,9 @@ const Movie = () => {
     <>
       {isLoading && <Loader />}
       {movie.original_title !== undefined && (
-        <section>
-          <div>
-            <Link to={backLinkHref}>Go back</Link>
+        <section className="movie-section">
+          <div className="movie-section__box-img">
+            <Link to={backLinkHref}> 🠐 Go back</Link>
             {poster_path !== undefined && (
               <img
                 src={
@@ -54,10 +54,11 @@ const Movie = () => {
                     : defaultPhoto
                 }
                 alt={original_title}
+                width="350"
               />
             )}
           </div>
-          <div>
+          <div className="movie-section__box-description">
             <div>
               <h2>{original_title}</h2> <h2>{release_date}</h2>
             </div>
@@ -78,8 +79,8 @@ const Movie = () => {
               <p>No information available</p>
             )}
           </div>
-          <div>
-            <ul>
+          <div className="movie-section__box-info">
+            <ul className="movie-section__list">
               <li>
                 <Link
                   to={`/movies/${movieId}/cast`}

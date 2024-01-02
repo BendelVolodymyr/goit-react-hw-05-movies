@@ -50,7 +50,7 @@ const MoviesPage = () => {
           value={searchName}
           onChange={handleInputChange}
         ></input>
-        <button type="submit"></button>
+        <button type="submit">Search</button>
       </form>
       {isLoading && <Loader />}
       <MoviesList movies={movies} location={location} />

@@ -31,8 +31,8 @@ const Cast = () => {
     <>
       {isLoading && <Loader />}
       {movieCast.length !== 0 ? (
-        <div>
-          <ul>
+        <div className="box-cast">
+          <ul className="box-cast__list">
             {movieCast.map(
               ({ profile_path, id, original_name, popularity }) => (
                 <li key={id}>

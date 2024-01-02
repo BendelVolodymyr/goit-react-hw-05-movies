@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 const MoviesList = ({ movies, location }) => {
   return (
-    <div>
-      <ul>
+    <div className="box-home">
+      <ul className="box-home__list">
         {movies.map(
           ({ original_title, id }) =>
             original_title !== undefined && (
