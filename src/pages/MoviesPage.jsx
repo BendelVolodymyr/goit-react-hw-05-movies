@@ -5,11 +5,17 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import { getMovieSearch } from 'services/getMovies';
 
 const MoviesPage = () => {
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchName, setSearchName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const location = useLocation();
+
+  useEffect(() => {
+    const query = searchParams.get('search');
+    if (!query) return;
+    getSearchName(query);
+  }, [searchParams]);
 
   useEffect(() => {
     if (location.search === '') return;
@@ -35,7 +41,6 @@ const MoviesPage = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (!searchName.trim()) return alert('Can not be empty');
-    getSearchName(searchName);
     setSearchParams({ search: searchName });
     setSearchName('');
   };
