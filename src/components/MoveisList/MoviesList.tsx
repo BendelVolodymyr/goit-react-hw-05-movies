@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
+import { IMovieListProps } from 'type/MoviesList';
 
-const MoviesList = ({ movies, location }) => {
+import styles from './MoviesList.module.scss';
+
+const MoviesList: React.FC<IMovieListProps> = ({ movies, location }) => {
   return (
-    <div className="box-home">
-      <ul className="box-home__list">
+    <div className={styles.container}>
+      <ul className={styles.list}>
         {movies.map(
           ({ original_title, id }) =>
             original_title !== undefined && (
-              <li key={id}>
+              <li key={id} className={styles.listItem}>
                 <Link to={`/movies/${id}`} state={{ from: location }}>
                   {original_title}
                 </Link>

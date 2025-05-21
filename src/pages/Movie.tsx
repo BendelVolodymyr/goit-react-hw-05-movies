@@ -2,30 +2,32 @@ import Loader from 'components/Loader/Loader';
 import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieId } from 'services/getMovies';
+import { IMovie } from 'type/Movie';
+import styles from './Movie.module.scss';
 
 const defaultPhoto =
   'https://www.reelviews.net/resources/img/default_poster.jpg';
 
 const Movie = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [movie, setMovie] = useState<Partial<IMovie>>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
     setIsLoading(true);
-    const getMovie = async id => {
+    const getMovie = async (id: string | number) => {
       try {
         const data = await getMovieId(id);
         setMovie(data);
       } catch (error) {
-        console.log('Error:', error.message);
+        console.log('Error:', error instanceof TypeError);
       } finally {
         setIsLoading(false);
       }
     };
-    getMovie(movieId);
+    if (movieId) getMovie(movieId);
   }, [movieId]);
 
   const {
@@ -37,50 +39,49 @@ const Movie = () => {
     genres,
   } = movie;
 
-  const resultPercentages = Math.round(vote_average * 10);
+  const resultPercentages = vote_average ? Math.round(vote_average * 10) : null;
 
   return (
     <>
       {isLoading && <Loader />}
-      {movie.original_title !== undefined && (
-        <section className="movie-section">
-          <div className="movie-section__box-img">
-            <Link to={backLinkHref}> 🠐 Go back</Link>
-            {poster_path !== undefined && (
-              <img
-                src={
-                  poster_path
-                    ? `https://image.tmdb.org/t/p/w342/${poster_path}`
-                    : defaultPhoto
-                }
-                alt={original_title}
-                width="350"
-              />
-            )}
+      {original_title && (
+        <section className={styles.movieSection}>
+          <div className={styles.boxImg}>
+            <Link to={backLinkHref} className={styles.backLink}>
+              🠐 Go back
+            </Link>
+            <img
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w342/${poster_path}`
+                  : defaultPhoto
+              }
+              alt={original_title}
+              width={350}
+              loading="lazy"
+            />
           </div>
-          <div className="movie-section__box-description">
+
+          <div className={styles.boxDescription}>
             <div>
-              <h2>{original_title}</h2> <h2>{release_date}</h2>
+              <h2>{original_title}</h2>
+              <h2>{release_date}</h2>
             </div>
-            <span>Use score: {resultPercentages}%</span>
+            {resultPercentages !== null && (
+              <span>User score: {resultPercentages}%</span>
+            )}
             <h3>Overview</h3>
-            <span>{overview}</span>
+            <span>{overview || 'No overview available'}</span>
             <h3>Genres</h3>
-            {genres.length !== 0 ? (
-              <span>
-                {' '}
-                {genres
-                  .map(element => {
-                    return element.name;
-                  })
-                  .join(' ')}
-              </span>
+            {genres && genres.length > 0 ? (
+              <span>{genres.map(({ name }) => name).join(', ')}</span>
             ) : (
               <p>No information available</p>
             )}
           </div>
-          <div className="movie-section__box-info">
-            <ul className="movie-section__list">
+
+          <div className={styles.boxInfo}>
+            <ul className={styles.movieList}>
               <li>
                 <Link
                   to={`/movies/${movieId}/cast`}
@@ -99,7 +100,8 @@ const Movie = () => {
               </li>
             </ul>
           </div>
-          <Suspense fallback={<div>Loading ...</div>}>
+
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </section>

@@ -3,10 +3,13 @@ import MoviesList from 'components/MoveisList/MoviesList';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getMoviesTrend } from 'services/getMovies';
+import { TMovie } from 'type/MoviesList';
+
+import styles from './HomePage.module.scss';
 
 const HomePage = () => {
-  const [resultTrend, setResultTrend] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [resultTrend, setResultTrend] = useState<TMovie[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,7 +20,7 @@ const HomePage = () => {
         const { results } = data;
         setResultTrend(results);
       } catch (error) {
-        console.log('Error:', error.message);
+        console.log('Error:', error instanceof TypeError);
       } finally {
         setIsLoading(false);
       }
@@ -26,10 +29,15 @@ const HomePage = () => {
   }, []);
 
   return (
-    <>
-      {isLoading && <Loader />}
-      <MoviesList movies={resultTrend} location={location} />
-    </>
+    <div className={styles.container}>
+      {isLoading ? (
+        <div className={styles.loaderWrapper}>
+          <Loader />
+        </div>
+      ) : (
+        <MoviesList movies={resultTrend} location={location} />
+      )}
+    </div>
   );
 };
 

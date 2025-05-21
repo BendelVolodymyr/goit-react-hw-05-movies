@@ -1,0 +1,85 @@
+/* Movie.module.scss */
+
+.movieSection {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.boxImg {
+  flex: 1 1 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.backLink {
+  align-self: flex-start;
+  margin-bottom: 10px;
+  color: #3b82f6;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: #1e40af;
+  }
+}
+
+.boxDescription {
+  flex: 2 1 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  h2 {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    margin-bottom: 5px;
+    color: #374151;
+  }
+
+  span {
+    font-size: 1rem;
+    color: #4b5563;
+  }
+}
+
+.boxInfo {
+  width: 100%;
+  margin-top: 20px;
+
+  .movieList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+
+    li {
+      a {
+        color: #2563eb;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

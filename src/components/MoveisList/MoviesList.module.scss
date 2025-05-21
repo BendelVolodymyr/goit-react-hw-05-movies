@@ -1,0 +1,30 @@
+/* MoviesList.module.scss */
+
+.container {
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  margin-bottom: 12px;
+}
+
+.listItem a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: #0056b3;
+    outline: none;
+  }
+}

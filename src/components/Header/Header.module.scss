@@ -1,0 +1,42 @@
+.header {
+  background-color: #222;
+  padding: 20px 0;
+  color: #fff;
+}
+
+.headerBox {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.navLink a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navLink a.active,
+.navLink a:hover,
+.navLink a:focus {
+  color: #61dafb;
+  outline: none;
+}

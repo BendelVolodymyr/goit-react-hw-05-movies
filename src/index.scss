@@ -1,0 +1,287 @@
+@import-normalize; // Нормалізація стилів
+
+// ==========================
+// VARIABLES
+// ==========================
+$color-bg-primary: #5b8899;
+$color-bg-header: #726cc1;
+$color-bg-button: #c5a595;
+$color-bg-button-hover: rgb(52, 56, 139);
+$color-text-primary: #212121;
+$color-text-link: #22181f;
+$color-text-link-hover: #f1f8e6;
+$color-active-bg: #a14d89;
+$color-active-shadow: rgba(161, 77, 137, 0.3);
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+
+$border-radius-base: 8px;
+$box-shadow-header: 9px 16px 19px 0 rgba(179, 237, 116, 0.29);
+
+// ==========================
+// BASE STYLES
+// ==========================
+html {
+  box-sizing: border-box;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-family-base;
+  color: $color-text-primary;
+  background-color: $color-bg-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: $color-text-link;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: $color-text-link-hover;
+    outline: none;
+  }
+
+  &:visited {
+    color: $color-text-link;
+  }
+}
+
+// ==========================
+// HEADER
+// ==========================
+.header {
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  padding: 10px 20px;
+  background-color: $color-bg-header;
+  box-shadow: $box-shadow-header;
+  border-radius: 0 0 10px 10px;
+}
+
+.header__nav-list {
+  display: flex;
+  gap: 15px;
+}
+
+.header__nav-link > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.active {
+  color: $color-text-link-hover;
+  background-color: $color-active-bg;
+  box-shadow: 0 0 23px 2px $color-active-shadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// ==========================
+// FORM (SEARCH)
+// ==========================
+form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  input {
+    border-radius: $border-radius-base;
+    border: none;
+    padding: 10px 15px;
+    width: 300px;
+    font-size: 1rem;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 6px $color-bg-header;
+    }
+  }
+
+  button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: $color-bg-button;
+    color: $color-text-primary;
+    font-weight: 600;
+    border-radius: $border-radius-base;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover,
+    &:focus {
+      background-color: $color-bg-button-hover;
+      color: #fff;
+      outline: none;
+    }
+  }
+}
+
+// ==========================
+// MOVIE LIST (HOME PAGE)
+// ==========================
+.box-home__list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+// ==========================
+// MOVIE PAGE LAYOUT
+// ==========================
+.movie-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas:
+    'left left right right right'
+    'left left right right right'
+    'bottom bottom bottom bottom bottom'
+    'footer footer footer footer footer';
+  gap: 20px;
+
+  &__box-img {
+    grid-area: left;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 370px;
+    height: 575px;
+
+    img {
+      border-radius: 10px;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: $color-bg-header;
+      font-weight: 600;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__box-description {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 30px;
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  &__box-info {
+    grid-area: bottom;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+    ul {
+      display: flex;
+      gap: 40px;
+      padding: 0;
+
+      li {
+        list-style: none;
+
+        a {
+          color: $color-bg-header;
+          font-weight: 600;
+          text-decoration: none;
+          padding: 5px 10px;
+          border-radius: 6px;
+          transition: background-color 0.3s ease;
+
+          &:hover,
+          &:focus {
+            background-color: $color-bg-header;
+            color: #fff;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// CAST SECTION
+// ==========================
+.box-cast {
+  grid-area: footer;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 50px;
+    width: 100%;
+    max-width: 1300px;
+
+    li {
+      text-align: center;
+
+      img {
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      h4 {
+        margin: 10px 0 5px;
+      }
+    }
+  }
+
+  p {
+    max-width: 1300px;
+    text-align: center;
+  }
+}
+
+// ==========================
+// GENERAL
+// ==========================
+div {
+  display: block;
+}
